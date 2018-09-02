@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CountriesActivity"
-            android:label="@string/countries_activity">
+            android:name=".CitiesActivity"
+            android:label="@string/cities_activity">
 
         </activity>
     </application>

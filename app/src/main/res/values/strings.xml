@@ -3,7 +3,7 @@
     <string name="helloWorld">Hello World!</string>
     <string name="weather_activity">Clima</string>
     <string name="title_activity_weather">WeatherActivity</string>
-    <string name="change_city">Change city</string>
+    <string name="change_city">Cambiar ciudad</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="countries_activity">Paises</string>
+    <string name="cities_activity">Ciudades</string>
 </resources>

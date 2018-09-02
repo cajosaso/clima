@@ -37,4 +37,13 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_refresh" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/weather_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp" />
+
 </FrameLayout>

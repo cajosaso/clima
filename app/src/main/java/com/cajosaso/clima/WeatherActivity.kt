@@ -3,10 +3,13 @@ package com.cajosaso.clima
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_weather.*
 
 class WeatherActivity : AppCompatActivity() {
@@ -24,6 +27,18 @@ class WeatherActivity : AppCompatActivity() {
             val img = findViewById<ImageView>(R.id.background)
             img.setImageResource(R.drawable.dia)
         }
+
+        val rv = findViewById<RecyclerView>(R.id.weather_recycler_view)
+        rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        val weatherWeek = ArrayList<Weather>()
+        weatherWeek.add(Weather("Monday", "Cloudy"))
+        weatherWeek.add(Weather("Tuesday", "Foggy"))
+        weatherWeek.add(Weather("Wednesday", "Sunny"))
+        weatherWeek.add(Weather("Friday", "Rainy"))
+
+        var adapter = WeatherAdapter(this, weatherWeek)
+        rv.adapter = adapter
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,7 +56,7 @@ class WeatherActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_change_city -> {
                 Log.d(TAG, "onOptionsItemSelected: pressed action_change_city")
-                val intent = Intent(this, CountriesActivity::class.java)
+                val intent = Intent(this, CitiesActivity::class.java)
                 startActivity(intent)
                 return super.onOptionsItemSelected(item)
             }
