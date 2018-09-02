@@ -16,7 +16,7 @@ class CitiesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cities)
         Log.d(TAG, "onCreate")
 
-        val rv = findViewById<RecyclerView>(R.id.recyclerView1)
+        val rv = findViewById<RecyclerView>(R.id.cities_recycler_view)
         rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         val cities = ArrayList<City>()
         cities.add(City("Salta"))

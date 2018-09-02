@@ -4,10 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 
 import kotlinx.android.synthetic.main.activity_weather.*
 
@@ -26,6 +29,18 @@ class WeatherActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+
+        val rv = findViewById<RecyclerView>(R.id.weather_recycler_view)
+        rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        val weatherWeek = ArrayList<Weather>()
+        weatherWeek.add(Weather("Monday", "Cloudy"))
+        weatherWeek.add(Weather("Tuesday", "Foggy"))
+        weatherWeek.add(Weather("Wednesday", "Sunny"))
+        weatherWeek.add(Weather("Friday", "Rainy"))
+
+        var adapter = WeatherAdapter(this, weatherWeek)
+        rv.adapter = adapter
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
