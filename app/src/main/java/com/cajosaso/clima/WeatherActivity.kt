@@ -43,7 +43,7 @@ class WeatherActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_change_city -> {
                 Log.d(TAG, "onOptionsItemSelected: pressed action_change_city")
-                val intent = Intent(this, CountriesActivity::class.java)
+                val intent = Intent(this, CitiesActivity::class.java)
                 startActivity(intent)
                 return super.onOptionsItemSelected(item)
             }
