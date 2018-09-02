@@ -19,9 +19,18 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
+        val preferences = this.getPreferences(0)
+        val initialCity = preferences.getString("city", getString(R.string.weather_activity))
+        val intent = intent
+        val cityName = intent.getStringExtra("name") ?: initialCity
 
         setContentView(R.layout.activity_weather)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = cityName
+
+        var edit = preferences.edit()
+        edit.putString("city", cityName)
+        edit.apply()
 
         fab.setOnClickListener { view ->
             val img = findViewById<ImageView>(R.id.background)

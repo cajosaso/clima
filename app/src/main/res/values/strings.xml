@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">clima</string>
+    <string name="app_name">Clima</string>
     <string name="helloWorld">Hello World!</string>
-    <string name="weather_activity">Clima</string>
+    <string name="weather_activity">Buenos Aires, AR</string>
     <string name="title_activity_weather">WeatherActivity</string>
     <string name="change_city">Cambiar ciudad</string>
     <string name="title_activity_main">MainActivity</string>
