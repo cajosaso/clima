@@ -111,7 +111,8 @@ class WeatherActivity : AppCompatActivity() {
                 }
 
                 val jSONForecast = response.getJSONArray("forecast")
-                for (i in 0 until jSONForecast.length()) {
+                var cantidad = 0
+                for (i in 0 until 5) {
                     val midnightDay= jSONForecast.getJSONObject(i).getString("midnightDay")
                     val noonTemp= jSONForecast.getJSONObject(i).getString("noonTemp")
                     val noonIcon= jSONForecast.getJSONObject(i).getString("noonIcon")
