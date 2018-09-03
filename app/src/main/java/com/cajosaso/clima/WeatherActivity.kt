@@ -72,11 +72,14 @@ class WeatherActivity : AppCompatActivity() {
     private fun loadData(){
         Log.d(TAG, "loadData")
 
-        weatherWeek.add(Weather("2018-09-01", "12.31", "78", "10d","11.50", "80", "10d" ))
-        weatherWeek.add(Weather("2018-09-02", "13.31", "80", "10d","12.5", "81", "10d" ))
-        weatherWeek.add(Weather("2018-09-03", "11.31", "99", "10d","16.50", "83", "10d" ))
-        weatherWeek.add(Weather("2018-09-04", "5.31", "40", "10d","0", "81", "10d" ))
-        weatherWeek.add(Weather("2018-09-05", "11.3", "56", "10d","-5.5", "83", "10d" ))
+        //Como puede suceder que no se reciba datos del noonDay (porque es de noche), hay que hacer
+        //que si se recibe noonDay == null, ponga noonTemp = midnightTemp y noonIcon = midnightIcon
+
+        weatherWeek.add(Weather("2018-09-01","12.31", "10d","11.50","10d" ))
+        weatherWeek.add(Weather("2018-09-02","13.31", "10d","12.5","10d" ))
+        weatherWeek.add(Weather("2018-09-03","11.31", "10d","16.50","10d" ))
+        weatherWeek.add(Weather("2018-09-04","5.31", "10d","0","10d" ))
+        weatherWeek.add(Weather("2018-09-05","11.3", "10d","-5.5","10d" ))
 
     }
 

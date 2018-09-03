@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/day"
+                android:id="@+id/midnightDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -42,7 +42,7 @@
                 card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/dayTemp"
+                android:id="@+id/noonTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -53,14 +53,14 @@
                 android:text="Name"
                 android:textSize="17sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toStartOf="@+id/dayIcon"
+                card_view:layout_constraintEnd_toStartOf="@+id/noonIcon"
                 card_view:layout_constraintHorizontal_bias="1.0"
-                card_view:layout_constraintStart_toEndOf="@+id/day"
+                card_view:layout_constraintStart_toEndOf="@+id/midnightDay"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintVertical_bias="0.514" />
 
             <ImageView
-                android:id="@+id/dayIcon"
+                android:id="@+id/noonIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
@@ -77,7 +77,7 @@
                 card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/nightTemp"
+                android:id="@+id/midnightTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -85,18 +85,18 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_toStartOf="@+id/nightIcon"
+                android:layout_toStartOf="@+id/midnightIcon"
                 android:text="Name"
                 android:textSize="17sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toStartOf="@+id/nightIcon"
+                card_view:layout_constraintEnd_toStartOf="@+id/midnightIcon"
                 card_view:layout_constraintHorizontal_bias="0.894"
-                card_view:layout_constraintStart_toEndOf="@+id/dayIcon"
+                card_view:layout_constraintStart_toEndOf="@+id/noonIcon"
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintVertical_bias="0.514" />
 
             <ImageView
-                android:id="@+id/nightIcon"
+                android:id="@+id/midnightIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"

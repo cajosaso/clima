@@ -1,24 +1,16 @@
 package com.cajosaso.clima
 
 import android.content.Context
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.support.v4.content.ContextCompat.startActivity
-import android.content.Intent
-import android.os.Build
 import android.text.format.DateUtils
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -32,23 +24,21 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
         val URL = "http://openweathermap.org/img/w/"
         val type = ".png"
 
-        val dayURL = URL + weatherList[position].dayIcon + type
-        val nightURL = URL + weatherList[position].nightIcon + type
+        val noonURL = URL + weatherList[position].noonIcon + type
+        val midnightURL = URL + weatherList[position].midnightIcon + type
 
         Glide.with(context)
-                .load(dayURL)
-                .into(holder.dayIcon);
+                .load(noonURL)
+                .into(holder.noonIcon);
 
          Glide.with(context)
-                .load(nightURL)
-                .into(holder.nightIcon);
+                .load(midnightURL)
+                .into(holder.midnightIcon);
 
 
-        holder.day?.text = formatDate(weatherList[position].day)
-        holder.dayTemp?.text = weatherList[position].dayTemp + "°C"
-        //holder?.dayHumidity?.text = weatherList[position].dayHumidity
-        holder.nightTemp?.text = weatherList[position].nightTemp + "°C"
-        //holder?.nightHumidity?.text = weatherList[position].nightHumidity
+        holder.midnightDay?.text = formatDate(weatherList[position].midnightDay)
+        holder.noonTemp?.text = weatherList[position].noonTemp + "°C"
+        holder.midnightTemp?.text = weatherList[position].midnightTemp + "°C"
 
     }
 
@@ -75,14 +65,6 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
         val formato = SimpleDateFormat("EEEE, dd/MM ", Locale("es", "AR"))
         val newDate = formato.format(date)
         return newDate
-/*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val date = LocalDate.parse(day, DateTimeFormatter.ISO_DATE)
-            return newDay
-        } else {
-            return day
-        }
-*/
 
     }
 
@@ -101,13 +83,11 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
     }
 
     class WeatherViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val day = itemView.findViewById<TextView>(R.id.day)
-        val dayTemp = itemView.findViewById<TextView>(R.id.dayTemp)
-        //val dayHumidity = itemView.findViewById<TextView>(R.id.dayHumidity)
-        val dayIcon = itemView.findViewById<ImageView>(R.id.dayIcon)
-        val nightTemp = itemView.findViewById<TextView>(R.id.nightTemp)
-        //val nightHumidity = itemView.findViewById<TextView>(R.id.nightHumidity)
-        val nightIcon = itemView.findViewById<ImageView>(R.id.nightIcon)
+        val midnightDay = itemView.findViewById<TextView>(R.id.midnightDay)
+        val noonTemp = itemView.findViewById<TextView>(R.id.noonTemp)
+        val noonIcon = itemView.findViewById<ImageView>(R.id.noonIcon)
+        val midnightTemp = itemView.findViewById<TextView>(R.id.midnightTemp)
+        val midnightIcon = itemView.findViewById<ImageView>(R.id.midnightIcon)
 
     }
 
