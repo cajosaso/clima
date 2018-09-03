@@ -7,3 +7,4 @@ clima.iml
 app.iml
 clima-app.iml
 gradlew*
+/gradle
