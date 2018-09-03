@@ -42,9 +42,6 @@ class WeatherActivity : AppCompatActivity() {
         path = "weather/" + cityName.replace(" ", "%20") + "/forecast"
 
         fab.setOnClickListener { view ->
-            val img = findViewById<ImageView>(R.id.background)
-            img.setImageResource(R.drawable.dia)
-
             loadData(path, "No fue posible conectarse al servidor, por favor intente más tarde")
 
         }
@@ -90,6 +87,13 @@ class WeatherActivity : AppCompatActivity() {
             Log.d(TAG, response.toString())
 
             if (response != null) {
+                val currentHour = response.getString("now").substring(0, 2).toInt()
+                val img = findViewById<ImageView>(R.id.background)
+                if ((currentHour >= 6) and (currentHour < 20))
+                    img.setImageResource(R.drawable.dia)
+                else
+                    img.setImageResource(R.drawable.noche)
+
                 val jSONForecast = response.getJSONArray("forecast")
                 for (i in 0 until jSONForecast.length()) {
                     val midnightDay= jSONForecast.getJSONObject(i).getString("midnightDay")
