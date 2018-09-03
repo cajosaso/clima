@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_cities.*
 import kotlinx.android.synthetic.main.city_item_layout.view.*
+import org.json.JSONObject
 
 class CitiesActivity : AppCompatActivity() {
 
@@ -28,23 +29,19 @@ class CitiesActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate")
 
         loadData()
-
-        cities_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        cities_recycler_view.adapter = CitiesAdapter(this, displayedCities)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         Log.d(TAG, "onCreateOptionsMenu")
-        menuInflater.inflate(R.menu.menu_search_cities,menu)
+        menuInflater.inflate(R.menu.menu_search_cities, menu)
         val searchItem = menu.findItem(R.id.search_cities)
-        if(searchItem != null){
+        if (searchItem != null) {
             Log.d(TAG, "searchItem != null")
             val searchView = searchItem.actionView as SearchView
             val editext = searchView.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
             editext.hint = "Search here..."
 
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     Log.d(TAG, "onQueryTextSubmit")
                     return true
@@ -53,17 +50,17 @@ class CitiesActivity : AppCompatActivity() {
                 override fun onQueryTextChange(newText: String?): Boolean {
                     Log.d(TAG, "onQueryTextChange")
                     displayedCities.clear()
-                    if(newText!!.isNotEmpty()){
+                    if (newText!!.isNotEmpty()) {
                         Log.d(TAG, "newText!!.isNotEmpty()")
                         val search = newText.toLowerCase()
                         cities.forEach {
                             Log.d(TAG, "cities.forEach")
-                            if(it.name.toLowerCase().contains(search)){
+                            if (it.name.toLowerCase().contains(search)) {
                                 Log.d(TAG, "it.name.toLowerCase().contains(search)")
                                 displayedCities.add(it)
                             }
                         }
-                    }else{
+                    } else {
                         displayedCities.addAll(cities)
                     }
                     cities_recycler_view.adapter.notifyDataSetChanged()
@@ -76,16 +73,30 @@ class CitiesActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun loadData(){
+    private fun loadData() {
         Log.d(TAG, "loadData")
 
-        cities.add(City("Salta"))
-        cities.add(City("Buenos Aires"))
-        cities.add(City("Mendoza"))
-        cities.add(City("San Martin de los Andes"))
+        val service = ServiceVolley()
+        val apiController = APIController(service)
 
-        cities.sort()
+        val path = "cities"
 
-        displayedCities.addAll(cities)
+        apiController.get(path) { response ->
+            Log.d(TAG, response.toString())
+
+            var jSONCities = response?.getJSONArray("data")
+            if (jSONCities != null) {
+                for (i in 0 until jSONCities.length()) {
+                    cities.add(City(jSONCities.getString(i)))
+                }
+                cities.sort()
+
+            }
+            displayedCities.addAll(cities)
+
+            cities_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+            cities_recycler_view.adapter = CitiesAdapter(this, displayedCities)
+
+        }
     }
 }

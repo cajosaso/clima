@@ -10,13 +10,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.activity_cities.*
 import kotlinx.android.synthetic.main.activity_weather.*
+import org.json.JSONObject
 
 class WeatherActivity : AppCompatActivity() {
 
     private val TAG = "WeatherActivity"
 
     val weatherWeek = ArrayList<Weather>()
+
+    var path = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +38,14 @@ class WeatherActivity : AppCompatActivity() {
         edit.putString("city", cityName)
         edit.apply()
 
+        path = "weather/" + cityName.replace(" ", "%20") + "/forecast"
+
         fab.setOnClickListener { view ->
             val img = findViewById<ImageView>(R.id.background)
             img.setImageResource(R.drawable.dia)
         }
 
-        loadData()
-
-        weather_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        weather_recycler_view.adapter = WeatherAdapter(this, weatherWeek)
-
+        loadData(path)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,20 +71,39 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadData(){
+    private fun loadData(path: String) {
         Log.d(TAG, "loadData")
+
+        Log.d(TAG, "Path: " + path)
 
         //Como puede suceder que no se reciba datos del noonDay (porque es de noche), hay que hacer
         //que si se recibe noonDay == null, ponga noonTemp = midnightTemp y noonIcon = midnightIcon
 
-        weatherWeek.add(Weather("2018-09-01","12.31", "10d","11.50","10d" ))
-        weatherWeek.add(Weather("2018-09-02","13.31", "10d","12.5","10d" ))
-        weatherWeek.add(Weather("2018-09-03","11.31", "10d","16.50","10d" ))
-        weatherWeek.add(Weather("2018-09-04","5.31", "10d","0","10d" ))
-        weatherWeek.add(Weather("2018-09-05","11.3", "10d","-5.5","10d" ))
+        val service = ServiceVolley()
+        val apiController = APIController(service)
 
-        weatherWeek.sort()
+        apiController.get(path) { response ->
+            Log.d(TAG, response.toString())
+            Log.d(TAG, response?.getJSONArray("forecast").toString())
+            var jSONForecast = response?.getJSONArray("forecast")
+
+            if (jSONForecast != null) {
+                for (i in 0 until jSONForecast.length()) {
+                    val midnightDay= jSONForecast.getJSONObject(i).getString("midnightDay")
+                    val noonTemp= jSONForecast.getJSONObject(i).getString("noonTemp")
+                    val noonIcon= jSONForecast.getJSONObject(i).getString("noonIcon")
+                    val midnightTemp= jSONForecast.getJSONObject(i).getString("midnightTemp")
+                    val midnightIcon= jSONForecast.getJSONObject(i).getString("midnightIcon")
+                    weatherWeek.add(Weather(midnightDay, noonTemp, noonIcon, midnightTemp, midnightIcon))
+                }
+                weatherWeek.sort()
+
+            }
+            Log.d(TAG, weatherWeek.toString())
+
+            weather_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+            weather_recycler_view.adapter = WeatherAdapter(this, weatherWeek)
+        }
 
     }
-
 }

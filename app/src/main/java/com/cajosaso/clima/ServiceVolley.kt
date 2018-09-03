@@ -10,7 +10,7 @@ import java.util.HashMap
 
 class ServiceVolley : ServiceInterface {
     val TAG = ServiceVolley::class.java.simpleName
-    val basePath = "https://your/backend/api/"
+    val basePath = " http://clima-server.herokuapp.com/"
 
     override fun get(path: String, completionHandler: (response: JSONObject?) -> Unit) {
         val jsonObjReq = object : JsonObjectRequest(Method.GET, basePath + path, null,
@@ -22,12 +22,6 @@ class ServiceVolley : ServiceInterface {
                     VolleyLog.e(TAG, "/get request fail! Error: ${error.message}")
                     completionHandler(null)
                 }) {
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val headers = HashMap<String, String>()
-                headers.put("Content-Type", "application/json")
-                return headers
-            }
         }
 
         BackendVolley.instance?.addToRequestQueue(jsonObjReq, TAG)

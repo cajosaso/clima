@@ -27,9 +27,11 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
         val noonURL = URL + weatherList[position].noonIcon + type
         val midnightURL = URL + weatherList[position].midnightIcon + type
 
-        Glide.with(context)
-                .load(noonURL)
-                .into(holder.noonIcon);
+        if (weatherList[position].noonIcon != "null"){
+            Glide.with(context)
+                    .load(noonURL)
+                    .into(holder.noonIcon);
+        }
 
          Glide.with(context)
                 .load(midnightURL)
@@ -37,7 +39,9 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
 
 
         holder.midnightDay?.text = formatDate(weatherList[position].midnightDay)
-        holder.noonTemp?.text = weatherList[position].noonTemp + "°C"
+        if (weatherList[position].noonTemp != "null"){
+            holder.noonTemp?.text = weatherList[position].noonTemp + "°C"
+        }
         holder.midnightTemp?.text = weatherList[position].midnightTemp + "°C"
 
     }
