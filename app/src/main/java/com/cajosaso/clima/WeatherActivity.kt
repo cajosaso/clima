@@ -4,26 +4,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_cities.*
 import kotlinx.android.synthetic.main.activity_weather.*
-import org.json.JSONObject
 import java.util.*
 
 class WeatherActivity : AppCompatActivity() {
 
-    private val TAG = "WeatherActivity"
+    private val TAG: String = WeatherActivity::class.java.simpleName
 
-    val weatherWeek = ArrayList<Weather>()
+    private val weatherWeek = ArrayList<Weather>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +33,7 @@ class WeatherActivity : AppCompatActivity() {
 
 
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             loadData("No fue posible conectarse al servidor, por favor intente más tarde")
 
         }
@@ -70,7 +65,7 @@ class WeatherActivity : AppCompatActivity() {
                     Log.d(TAG, response.toString())
 
                     if (response != null) {
-                        Log.d(TAG, "startActivity: CitiesActivity");
+                        Log.d(TAG, "startActivity: CitiesActivity")
                         val intent = Intent(this, CitiesActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -111,7 +106,6 @@ class WeatherActivity : AppCompatActivity() {
                 }
 
                 val jSONForecast = response.getJSONArray("forecast")
-                var cantidad = 0
                 for (i in 0 until 5) {
                     val midnightDay= jSONForecast.getJSONObject(i).getString("midnightDay")
                     val noonTemp= jSONForecast.getJSONObject(i).getString("noonTemp")

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/weather_parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -35,7 +33,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:gravity="start"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="#FF000000"
                 android:textSize="17sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
@@ -53,8 +51,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:textSize="17sp"
                 android:textColor="#FF000000"
+                android:textSize="17sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toStartOf="@+id/noonIcon"
                 card_view:layout_constraintHorizontal_bias="1.0"
@@ -76,7 +74,8 @@
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintHorizontal_bias="0.621"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent" />
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/noonIcon" />
 
             <TextView
                 android:id="@+id/midnightTemp"
@@ -88,7 +87,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_toStartOf="@+id/midnightIcon"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="#FF000000"
                 android:textSize="17sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
@@ -113,7 +112,8 @@
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintHorizontal_bias="1.0"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent" />
+                card_view:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/midnightIcon" />
 
         </android.support.constraint.ConstraintLayout>
 

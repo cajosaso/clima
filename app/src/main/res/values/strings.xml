@@ -6,4 +6,9 @@
     <string name="change_city">Cambiar ciudad</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="cities_activity">Ciudades</string>
+    <string name="name">Name</string>
+    <string name="midnightIcon">midnightIcon</string>
+    <string name="noonIcon">noonIcon</string>
+    <string name="background">background</string>
+    <string name="search">Search</string>
 </resources>

@@ -1,15 +1,13 @@
 package com.cajosaso.clima
 
 import android.util.Log
-import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.VolleyLog
 import com.android.volley.toolbox.JsonObjectRequest
 import org.json.JSONObject
-import java.util.HashMap
 
 class ServiceVolley : ServiceInterface {
-    val TAG = ServiceVolley::class.java.simpleName
+    private val TAG: String = ServiceVolley::class.java.simpleName
     val basePath = " http://clima-server.herokuapp.com/"
 
     override fun get(path: String, completionHandler: (response: JSONObject?) -> Unit) {

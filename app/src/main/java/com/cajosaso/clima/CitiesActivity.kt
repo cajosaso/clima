@@ -4,22 +4,16 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_cities.*
-import kotlinx.android.synthetic.main.city_item_layout.view.*
-import org.json.JSONObject
 
 class CitiesActivity : AppCompatActivity() {
 
-    private val TAG = "CitiesActivity"
+    private val TAG: String = CitiesActivity::class.java.simpleName
     val cities = ArrayList<City>()
     val displayedCities = ArrayList<City>()
 

@@ -8,11 +8,12 @@
 
     <ImageView
         android:id="@+id/background"
-        android:background="@color/colorPrimary"
-        android:scaleType = "centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/background" />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
