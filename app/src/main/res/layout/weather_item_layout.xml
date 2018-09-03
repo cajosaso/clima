@@ -17,7 +17,9 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        card_view:cardBackgroundColor="#BFFFFFFF"
+        card_view:cardElevation="0dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,6 +36,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="start"
                 android:text="Name"
+                android:textColor="#FF000000"
                 android:textSize="17sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +54,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:textSize="17sp"
+                android:textColor="#FF000000"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toStartOf="@+id/noonIcon"
                 card_view:layout_constraintHorizontal_bias="1.0"
@@ -85,6 +89,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_toStartOf="@+id/midnightIcon"
                 android:text="Name"
+                android:textColor="#FF000000"
                 android:textSize="17sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toStartOf="@+id/midnightIcon"

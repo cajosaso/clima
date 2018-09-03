@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/background"
-        android:src="@drawable/noche"
+        android:background="@color/colorPrimary"
         android:scaleType = "centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

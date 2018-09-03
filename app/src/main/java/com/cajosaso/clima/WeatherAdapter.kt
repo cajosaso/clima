@@ -1,6 +1,8 @@
 package com.cajosaso.clima
 
 import android.content.Context
+import android.graphics.Color
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>): RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
+class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>, val day: Boolean): RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
     private val TAG = "WeatherAdapter"
 
@@ -76,6 +78,24 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {
         Log.d(TAG, "onCreateViewHolder")
         val v = LayoutInflater.from(parent.context).inflate(R.layout.weather_item_layout, parent, false)
+        val card = v.findViewById<CardView>(R.id.card_view)
+        val midnightDay = v.findViewById<TextView>(R.id.midnightDay)
+        val noonTemp = v.findViewById<TextView>(R.id.noonTemp)
+        val midnightTemp = v.findViewById<TextView>(R.id.midnightTemp)
+
+        if (day) {
+            card.setCardBackgroundColor(Color.parseColor("#BFFFFFFF"))
+            midnightDay.setTextColor(Color.parseColor("#FF000000"))
+            noonTemp.setTextColor(Color.parseColor("#FF000000"))
+            midnightTemp.setTextColor(Color.parseColor("#FF000000"))
+        }
+        else {
+            card.setCardBackgroundColor(Color.parseColor("#c308052b"))
+            midnightDay.setTextColor(Color.parseColor("#FFFFFFFF"))
+            noonTemp.setTextColor(Color.parseColor("#FFFFFFFF"))
+            midnightTemp.setTextColor(Color.parseColor("#FFFFFFFF"))
+        }
+
         return WeatherViewHolder(v);
     }
 
@@ -92,6 +112,7 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
         val noonIcon = itemView.findViewById<ImageView>(R.id.noonIcon)
         val midnightTemp = itemView.findViewById<TextView>(R.id.midnightTemp)
         val midnightIcon = itemView.findViewById<ImageView>(R.id.midnightIcon)
+        val card = itemView.findViewById<CardView>(R.id.card_view)
 
     }
 

@@ -3,6 +3,7 @@ package com.cajosaso.clima
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_cities.*
 import kotlinx.android.synthetic.main.activity_weather.*
@@ -87,12 +89,19 @@ class WeatherActivity : AppCompatActivity() {
             Log.d(TAG, response.toString())
 
             if (response != null) {
+                weatherWeek.clear()
                 val currentHour = response.getString("now").substring(0, 2).toInt()
                 val img = findViewById<ImageView>(R.id.background)
-                if ((currentHour >= 6) and (currentHour < 20))
+                var day = true
+
+                if ((currentHour >= 6) and (currentHour < 20)) {
                     img.setImageResource(R.drawable.dia)
-                else
+
+                }
+                else {
+                    day = false
                     img.setImageResource(R.drawable.noche)
+                }
 
                 val jSONForecast = response.getJSONArray("forecast")
                 for (i in 0 until jSONForecast.length()) {
@@ -105,7 +114,8 @@ class WeatherActivity : AppCompatActivity() {
                 }
                 weatherWeek.sort()
                 weather_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-                weather_recycler_view.adapter = WeatherAdapter(this, weatherWeek)
+                weather_recycler_view.adapter = WeatherAdapter(this, weatherWeek, day)
+
             }
 
             else {
