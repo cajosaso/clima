@@ -1,1 +1,9 @@
 local.properties
+/app/build
+/.gradle
+/.idea
+gradle.properties
+clima.iml
+app.iml
+clima-app.iml
+gradlew*
