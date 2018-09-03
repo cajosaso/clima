@@ -84,6 +84,7 @@ class CitiesActivity : AppCompatActivity() {
         cities.add(City("Mendoza"))
         cities.add(City("San Martin de los Andes"))
 
+        cities.sort()
 
         displayedCities.addAll(cities)
     }
