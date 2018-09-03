@@ -16,6 +16,8 @@ class WeatherActivity : AppCompatActivity() {
 
     private val TAG = "WeatherActivity"
 
+    val weatherWeek = ArrayList<Weather>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
@@ -37,16 +39,10 @@ class WeatherActivity : AppCompatActivity() {
             img.setImageResource(R.drawable.dia)
         }
 
-        val rv = findViewById<RecyclerView>(R.id.weather_recycler_view)
-        rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        val weatherWeek = ArrayList<Weather>()
-        weatherWeek.add(Weather("Monday", "Cloudy"))
-        weatherWeek.add(Weather("Tuesday", "Foggy"))
-        weatherWeek.add(Weather("Wednesday", "Sunny"))
-        weatherWeek.add(Weather("Friday", "Rainy"))
+        loadData()
 
-        var adapter = WeatherAdapter(this, weatherWeek)
-        rv.adapter = adapter
+        weather_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        weather_recycler_view.adapter = WeatherAdapter(this, weatherWeek)
 
     }
 
@@ -71,6 +67,17 @@ class WeatherActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun loadData(){
+        Log.d(TAG, "loadData")
+
+        weatherWeek.add(Weather("2018-09-01", "12.31", "78", "10d","11.50", "80", "10d" ))
+        weatherWeek.add(Weather("2018-09-02", "13.31", "80", "10d","12.5", "81", "10d" ))
+        weatherWeek.add(Weather("2018-09-03", "11.31", "99", "10d","16.50", "83", "10d" ))
+        weatherWeek.add(Weather("2018-09-04", "5.31", "40", "10d","0", "81", "10d" ))
+        weatherWeek.add(Weather("2018-09-05", "11.3", "56", "10d","-5.5", "83", "10d" ))
+
     }
 
 }

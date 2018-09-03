@@ -77,10 +77,13 @@ class CitiesActivity : AppCompatActivity() {
     }
 
     private fun loadData(){
+        Log.d(TAG, "loadData")
+
         cities.add(City("Salta"))
         cities.add(City("Buenos Aires"))
         cities.add(City("Mendoza"))
         cities.add(City("San Martin de los Andes"))
+
 
         displayedCities.addAll(cities)
     }

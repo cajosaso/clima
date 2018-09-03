@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cajosaso.clima">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".BackendVolley"
         android:allowBackup="true"
