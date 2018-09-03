@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_cities.*
 import kotlinx.android.synthetic.main.activity_weather.*
 import org.json.JSONObject
@@ -43,9 +44,12 @@ class WeatherActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             val img = findViewById<ImageView>(R.id.background)
             img.setImageResource(R.drawable.dia)
+
+            loadData(path, "No fue posible conectarse al servidor, por favor intente más tarde")
+
         }
 
-        loadData(path)
+        loadData(path, "No fue posible conectarse al servidor, por favor reintente más tarde")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -71,7 +75,7 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadData(path: String) {
+    private fun loadData(path: String, toastMessage: String) {
         Log.d(TAG, "loadData")
 
         Log.d(TAG, "Path: " + path)
@@ -84,10 +88,9 @@ class WeatherActivity : AppCompatActivity() {
 
         apiController.get(path) { response ->
             Log.d(TAG, response.toString())
-            Log.d(TAG, response?.getJSONArray("forecast").toString())
-            var jSONForecast = response?.getJSONArray("forecast")
 
-            if (jSONForecast != null) {
+            if (response != null) {
+                val jSONForecast = response.getJSONArray("forecast")
                 for (i in 0 until jSONForecast.length()) {
                     val midnightDay= jSONForecast.getJSONObject(i).getString("midnightDay")
                     val noonTemp= jSONForecast.getJSONObject(i).getString("noonTemp")
@@ -97,12 +100,14 @@ class WeatherActivity : AppCompatActivity() {
                     weatherWeek.add(Weather(midnightDay, noonTemp, noonIcon, midnightTemp, midnightIcon))
                 }
                 weatherWeek.sort()
-
+                weather_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+                weather_recycler_view.adapter = WeatherAdapter(this, weatherWeek)
             }
-            Log.d(TAG, weatherWeek.toString())
 
-            weather_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-            weather_recycler_view.adapter = WeatherAdapter(this, weatherWeek)
+            else {
+                Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

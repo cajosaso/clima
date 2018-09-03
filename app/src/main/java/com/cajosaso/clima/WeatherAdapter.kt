@@ -68,7 +68,7 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>):
 
         val formato = SimpleDateFormat("EEEE, dd/MM ", Locale("es", "AR"))
         val newDate = formato.format(date)
-        return newDate
+        return newDate.capitalize()
 
     }
 
