@@ -93,7 +93,7 @@ class WeatherActivity : AppCompatActivity() {
 
             if (response != null) {
                 weatherWeek.clear()
-                val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+                val currentHour = response.getString("now").substring(0, 2).toInt()
                 val img = findViewById<ImageView>(R.id.background)
                 var day = true
 
