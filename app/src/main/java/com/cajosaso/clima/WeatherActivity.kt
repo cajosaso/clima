@@ -81,6 +81,8 @@ class WeatherActivity : AppCompatActivity() {
         weatherWeek.add(Weather("2018-09-04","5.31", "10d","0","10d" ))
         weatherWeek.add(Weather("2018-09-05","11.3", "10d","-5.5","10d" ))
 
+        weatherWeek.sort()
+
     }
 
 }
