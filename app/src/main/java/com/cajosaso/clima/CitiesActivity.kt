@@ -28,6 +28,9 @@ class CitiesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cities)
         Log.d(TAG, "onCreate")
 
+        cities_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        cities_recycler_view.adapter = CitiesAdapter(this, displayedCities, getSharedPreferences("my_preferences", Context.MODE_PRIVATE))
+
         loadData()
     }
 
@@ -83,19 +86,17 @@ class CitiesActivity : AppCompatActivity() {
 
         apiController.get(path) { response ->
             Log.d(TAG, response.toString())
-
-            var jSONCities = response?.getJSONArray("data")
-            if (jSONCities != null) {
+            if (response != null) {
+                val jSONCities = response.getJSONArray("data")
                 for (i in 0 until jSONCities.length()) {
                     cities.add(City(jSONCities.getString(i)))
                 }
                 cities.sort()
 
-            }
-            displayedCities.addAll(cities)
+                displayedCities.addAll(cities)
 
-            cities_recycler_view.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-            cities_recycler_view.adapter = CitiesAdapter(this, displayedCities)
+                cities_recycler_view.adapter.notifyDataSetChanged()
+            }
 
         }
     }

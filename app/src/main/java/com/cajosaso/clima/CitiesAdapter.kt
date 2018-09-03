@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -15,7 +16,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_weather.*
 
 
-class CitiesAdapter(val context: Context, val cityList: ArrayList<City>): RecyclerView.Adapter<CitiesAdapter.CitiesViewHolder>() {
+class CitiesAdapter(val context: Context, val cityList: ArrayList<City>, val preferences: SharedPreferences): RecyclerView.Adapter<CitiesAdapter.CitiesViewHolder>() {
 
     private val TAG = "CitiesAdapter"
 
@@ -35,10 +36,13 @@ class CitiesAdapter(val context: Context, val cityList: ArrayList<City>): Recycl
                 Log.d(TAG, response.toString())
 
                 if (response != null) {
-                    Toast.makeText(context, cityList[position].name, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "startActivity: WeatherActivity, City: " + cityList[position].name);
+
+                    val editPreferences = preferences.edit()
+                    editPreferences.putString("city", cityList[position].name)
+                    editPreferences.apply()
 
                     val intent = Intent(context, WeatherActivity::class.java)
-                    intent.putExtra("name", cityList[position].name)
                     context.startActivity(intent)
                 }
 

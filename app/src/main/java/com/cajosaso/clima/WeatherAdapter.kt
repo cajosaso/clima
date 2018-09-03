@@ -42,9 +42,9 @@ class WeatherAdapter(val context: Context, val weatherList: ArrayList<Weather>, 
 
         holder.midnightDay?.text = formatDate(weatherList[position].midnightDay)
         if (weatherList[position].noonTemp != "null"){
-            holder.noonTemp?.text = weatherList[position].noonTemp + "°C"
+            holder.noonTemp?.text = weatherList[position].noonTemp.toFloat().toInt().toString() + "°C"
         }
-        holder.midnightTemp?.text = weatherList[position].midnightTemp + "°C"
+        holder.midnightTemp?.text = weatherList[position].midnightTemp.toFloat().toInt().toString() + "°C"
 
     }
 
